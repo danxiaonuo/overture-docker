@@ -61,6 +61,8 @@ jobs:
         keep_minimum_runs: 1    #保留多少个workflow不删除
   
   overture-build:
+    # 依赖环境
+    needs: [gwf]
     # 选择虚拟环境
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
@@ -123,4 +125,4 @@ jobs:
       with:
         repository: ${{ github.repository }}
         retain_days: 1
-        keep_minimum_runs: 1    #保留多少个workflow不删除      
+        keep_minimum_runs: 1    #保留多少个workflow不删除
