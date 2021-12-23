@@ -85,7 +85,7 @@ RUN set -eux \
     && mv /overture/overture-${TARGETOS}-${TARGETARCH} /usr/bin/overture \
     && mv -f /tmp/china_ip.txt /overture/ip_network_primary_sample \
     && mv -f /tmp/gfwlist.txt /overture/domain_alternative_sample \
-    && mv -f /tmp/config.yaml /overture/config.yaml
+    && mv -f /tmp/config.yaml /overture/config.yaml \
     && rm -f overture.zip /tmp/* \
     && chmod 775 /usr/bin/overture
   
