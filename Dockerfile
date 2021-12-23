@@ -71,7 +71,7 @@ RUN set -eux \
 
 # 安装dumb-init
 RUN set -eux \
-    && wget --no-check-certificate https://github.com/Yelp/dumb-init/releases/download/v${DUMBINIT_VERSION}/dumb-init_${DUMBINIT_VERSION}_${TARGETARCH} -O /usr/bin/dumb-init \
+    && wget --no-check-certificate https://github.com/Yelp/dumb-init/releases/download/v${DUMBINIT_VERSION}/dumb-init_${DUMBINIT_VERSION}_x86_64 -O /usr/bin/dumb-init \
     && chmod +x /usr/bin/dumb-init
 
 # 拷贝overture配置文件
