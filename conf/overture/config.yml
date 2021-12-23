@@ -1,5 +1,5 @@
-bindAddress: :53
-debugHTTPAddress: 127.0.0.1:5555
+bindAddress: :53535
+debugHTTPAddress: :56565
 dohEnabled: false
 primaryDNS:
   - name: cn
