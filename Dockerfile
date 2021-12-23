@@ -74,19 +74,21 @@ RUN set -eux \
     && wget --no-check-certificate https://github.com/Yelp/dumb-init/releases/download/v${DUMBINIT_VERSION}/dumb-init_${DUMBINIT_VERSION}_${TARGETARCH} -O /usr/bin/dumb-init \
     && chmod +x /usr/bin/dumb-init
 
+# 拷贝overture配置文件
+COPY conf/overture/* /tmp/
+
 # 安装overture
 RUN set -eux \
     && wget --no-check-certificate https://github.com/shawn1m/overture/releases/download/${OVERTURE_VERSION}/overture-${TARGETOS}-${TARGETARCH}.zip -O overture.zip \
-    && mkdir /overture /etc/overture \
+    && mkdir /overture \
     && unzip overture.zip -d /overture \
     && mv /overture/overture-${TARGETOS}-${TARGETARCH} /usr/bin/overture \
-    && rm -f overture.zip /overture \
+    && mv -f /tmp/china_ip.txt /overture/ip_network_primary_sample \
+    && mv -f /tmp/gfwlist.txt /overture/domain_alternative_sample \
+    && mv -f /tmp/config.yaml /overture/config.yaml
+    && rm -f overture.zip /tmp/* \
     && chmod 775 /usr/bin/overture
-    
-# 拷贝overture配置文件
-COPY conf/overture/config.yaml /etc/overture/config.yaml
-COPY conf/overture/china_ip.txt /etc/overture/china_ip.txt
-COPY conf/overture/gfwlist.txt /etc/overture/gfwlist.txt
+  
 
 # 容器信号处理
 STOPSIGNAL SIGQUIT
@@ -95,4 +97,4 @@ STOPSIGNAL SIGQUIT
 ENTRYPOINT ["dumb-init"]
 
 # 运行overture
-CMD ["overture", "-v", "-c", "/etc/overture/config.yaml"]
+CMD ["overture", "-v", "-c", "/overture/config.yaml"]
