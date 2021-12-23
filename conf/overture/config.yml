@@ -1,6 +1,6 @@
 bindAddress: :53535
 debugHTTPAddress: :56565
-dohEnabled: false
+dohEnabled: true
 primaryDNS:
   - name: cn
     address: smartdns:6053
