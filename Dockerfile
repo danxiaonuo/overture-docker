@@ -41,16 +41,6 @@ ARG PKG_DEPS="\
       ca-certificates"
 ENV PKG_DEPS=$PKG_DEPS
 
-# dumb-init
-# https://github.com/Yelp/dumb-init
-ARG DUMBINIT_VERSION=1.2.5
-ENV DUMBINIT_VERSION=$DUMBINIT_VERSION
-
-# overture
-# https://github.com/shawn1m/overture
-ARG OVERTURE_VERSION=v1.8-rc1
-ENV OVERTURE_VERSION=$OVERTURE_VERSION
-
 # ***** 安装依赖 *****
 RUN set -eux \
    # 修改源地址
@@ -69,17 +59,12 @@ RUN set -eux \
    &&  sed -i -e 's/mouse=/mouse-=/g' /usr/share/vim/vim*/defaults.vim \
    &&  /bin/zsh
 
-# 安装dumb-init
-RUN set -eux \
-    && wget --no-check-certificate https://github.com/Yelp/dumb-init/releases/download/v${DUMBINIT_VERSION}/dumb-init_${DUMBINIT_VERSION}_x86_64 -O /usr/bin/dumb-init \
-    && chmod +x /usr/bin/dumb-init
-
 # 拷贝overture配置文件
 COPY conf/overture/* /tmp/
 
 # 安装overture
 RUN set -eux \
-    && wget --no-check-certificate https://github.com/shawn1m/overture/releases/download/${OVERTURE_VERSION}/overture-${TARGETOS}-${TARGETARCH}.zip -O overture.zip \
+    && wget --no-check-certificate https://github.com/shawn1m/overture/releases/latest/download/overture-${TARGETOS}-${TARGETARCH}.zip -O overture.zip \
     && mkdir /overture \
     && unzip overture.zip -d /overture \
     && mv /overture/overture-${TARGETOS}-${TARGETARCH} /usr/bin/overture \
@@ -89,12 +74,8 @@ RUN set -eux \
     && rm -f overture.zip /tmp/* \
     && chmod 775 /usr/bin/overture
   
-
 # 容器信号处理
 STOPSIGNAL SIGQUIT
-
-# 入口
-ENTRYPOINT ["dumb-init"]
 
 # 运行overture
 CMD ["overture", "-v", "-c", "/overture/config.yml"]
