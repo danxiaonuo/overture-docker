@@ -26,12 +26,12 @@ ipv6UseAlternativeDNS: false
 alternativeDNSConcurrent: true
 whenPrimaryDNSAnswerNoneUse: primaryDNS
 ipNetworkFile:
-  primary: /overture/ip_network_primary_sample
-  alternative: /overture/ip_network_alternative_sample
+  primary: /overture/china_ip.txt
+  alternative: /overture/china_ip.txt
 domainFile:
-  primary: /overture/domain_primary_sample
-  alternative: /overture/domain_alternative_sample
-  matcher: full-map
+  primary: /overture/china_list.txt
+  alternative: /overture/gfw_list.txt
+  matcher: suffix-tree
 hostsFile:
   hostsFile: /overture/hosts_sample
   finder: full-map
