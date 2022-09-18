@@ -68,8 +68,9 @@ RUN set -eux \
     && mkdir /overture \
     && unzip overture.zip -d /overture \
     && mv /overture/overture-${TARGETOS}-${TARGETARCH} /usr/bin/overture \
-    && mv -f /tmp/china_ip.txt /overture/ip_network_primary_sample \
-    && mv -f /tmp/gfwlist.txt /overture/domain_alternative_sample \
+    && mv -f /tmp/china_ip.txt /overture/china_ip.txt \
+    && mv -f /tmp/china_list.txt /overture/china_list.txt \
+    && mv -f /tmp/gfw_list.txt /overture/gfw_list.txt \
     && mv -f /tmp/config.yml /overture/config.yml \
     && rm -f overture.zip /tmp/* \
     && chmod 775 /usr/bin/overture
