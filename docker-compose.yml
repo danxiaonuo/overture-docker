@@ -43,6 +43,10 @@ services:
     # 解决容器的依赖
     #depends_on:
     #  - ""
+    # dns配置
+    dns:
+     - 8.8.8.8
+     - 8.8.4.4
     # 配置容器连接的网络
     networks:
       dns_net:
@@ -106,6 +110,10 @@ services:
     # 解决容器的依赖
     depends_on:
      - "smartdns"
+    # dns配置
+    dns:
+     - 8.8.8.8
+     - 8.8.4.4
     # 配置容器连接的网络
     networks:
       dns_net:
